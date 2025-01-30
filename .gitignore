@@ -45,3 +45,4 @@ rsconnect/
 _targets/
 graphs/
 !graphs/.gitkeep
+data/clean/
