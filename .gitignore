@@ -44,3 +44,4 @@ rsconnect/
 
 _targets/
 graphs/
+!graphs/.gitkeep
