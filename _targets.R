@@ -110,5 +110,12 @@ list(
     pattern = map(sic_group_url),
     deployment = "worker",
     format = "rds"
+  ),
+  tar_file(
+    sic_csv_file,
+    write_csv_file(
+      sic,
+      fs::path("data", "clean", "sic.csv")
+    )
   )
 )
