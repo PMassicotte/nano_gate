@@ -37,6 +37,9 @@ extract_sic <- function(df) {
 
   r <- rast(unique(df[["sic_url"]]))
 
+  r[r > 100L] <- NA
+  r <- r / 100L
+
   pts <- pts |>
     project(r)
 
