@@ -9,6 +9,8 @@ library(rnaturalearth)
 library(rerddap)
 library(rerddapXtracto)
 library(crew)
+library(terra)
+library(glue)
 
 # Set default ggplot2 font size and font family
 theme_set(theme_minimal())
@@ -25,8 +27,6 @@ tar_option_set(
   controller = crew_controller_local(workers = 12L)
 )
 
-
-# Source additional R scripts
 tar_source()
 
 list(
@@ -98,5 +98,17 @@ list(
       monthly_chla,
       fs::path("data", "clean", "monthly_chla.csv")
     )
+  ),
+  tar_target(sic_url, build_sic_raster_urls(stations)),
+  tar_group_by(sic_group_url, sic_url, hemisphere, sic_date),
+  tar_option_set(
+    controller = crew_controller_local(workers = 24L)
+  ),
+  tar_target(
+    sic,
+    possibly(extract_sic, otherwise = tibble())(sic_group_url),
+    pattern = map(sic_group_url),
+    deployment = "worker",
+    format = "rds"
   )
 )
