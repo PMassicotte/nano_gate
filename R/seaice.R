@@ -1,3 +1,12 @@
+#' Build Sea Ice Concentration Raster URLs
+#'
+#' This function generates URLs for downloading sea ice concentration raster
+#' data for the given stations.
+#'
+#' @param stations A data frame containing station information.
+#' @return A character vector of URLs for downloading sea ice concentration
+#' raster data.
+#' @export
 build_sic_raster_urls <- function(stations) {
   df <- stations |>
     mutate(hemisphere = if_else(latitude < 0L, "sh", "nh")) |>
@@ -27,6 +36,15 @@ build_sic_raster_urls <- function(stations) {
   df
 }
 
+#' Extract Sea Ice Concentration
+#'
+#' This function extracts sea ice concentration data from a raster file
+#' and associates it with the given data frame of geographical points.
+#'
+#' @param df A data frame containing columns: longitude, latitude, and sic_url.
+#' @return A tibble with sea ice concentration data and the original data frame
+#' columns.
+#' @export
 extract_sic <- function(df) {
   pts <- df |>
     vect(

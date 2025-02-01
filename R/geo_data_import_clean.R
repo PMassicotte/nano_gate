@@ -1,3 +1,8 @@
+#' Import geographic positions from an Excel file
+#'
+#' @param file Path to the Excel file containing geographic positions
+#' @return A data frame with columns: date, latitude, longitude
+#' @export
 import_geo_position <- function(file) {
   positions <- read_excel(
     file,
@@ -10,6 +15,11 @@ import_geo_position <- function(file) {
   positions
 }
 
+#' Plot stations on a world map
+#'
+#' @param stations A data frame with columns: date, latitude, longitude
+#' @return A ggplot object displaying stations on a world map
+#' @export
 plot_stations <- function(stations) {
   wm <- ne_download()
 
