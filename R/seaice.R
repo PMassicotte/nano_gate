@@ -69,3 +69,59 @@ extract_sic <- function(df) {
 
   sic
 }
+
+
+#' Calculate the number of open water days (OWD)
+#'
+#' This function calculates the number of open water days based on sea ice
+#' concentration (SIC) data.
+#'
+#' @param sic A data frame containing sea ice concentration data.
+#' @param threshold A numeric value between 0 and 1 representing the SIC
+#' threshold.
+#' @return A data frame summarizing the number of open water days by
+#' hemisphere, longitude, and latitude.
+calculate_owd <- function(sic, threshold) {
+  tar_assert_true(
+    threshold >= 0L && threshold <= 1L,
+    "SIC threshold must be between 0 and 1"
+  )
+
+  sic_clean <- sic |>
+    drop_na(sea_ice_concentraton) |>
+    filter(sic_date <= date)
+
+  owd <- sic_clean |>
+    summarize(
+      number_open_water_day = sum(sea_ice_concentraton <= threshold),
+      .by = c(date, hemisphere, longitude, latitude)
+    )
+
+  owd
+}
+
+#' Plot Open Water Day (OWD)
+#'
+#' This function creates a plot of the number of open water days prior to the
+#' sampling date.
+#'
+#' @param owd A data frame containing the number of open water days with
+#' longitude and latitude coordinates.
+#' @return A ggplot object representing the open water days on a map.
+plot_open_water_day <- function(owd) {
+  wm <- ne_download()
+
+  owd |>
+    st_as_sf(coords = c("longitude", "latitude"), crs = "EPSG:4326") |>
+    ggplot() +
+    geom_sf(data = wm, linewidth = 0.1) +
+    geom_sf(aes(size = number_open_water_day), color = "red") +
+    scale_size_continuous(range = c(0.5, 2L)) +
+    labs(
+      size = str_wrap(
+        "Number of open water day prior to the sampling date",
+        20L
+      )
+    ) +
+    coord_sf(crs = "+proj=robin")
+}

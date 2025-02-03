@@ -117,5 +117,30 @@ list(
       sic,
       fs::path("data", "clean", "sic.csv")
     )
+  ),
+  tar_target(owd, calculate_owd(sic, 0.15)),
+  tar_file(
+    sic_owd_csv_file,
+    write_csv_file(
+      owd,
+      fs::path("data", "clean", "sic_owd.csv")
+    )
+  ),
+  tar_target(sic_owd_plot, plot_open_water_day(owd), format = "rds"),
+  tar_file(
+    sic_owd_plot_file,
+    {
+      filename <- fs::path("graphs", "sic_owd_plot.pdf")
+
+      ggsave(
+        filename = filename,
+        plot = sic_owd_plot,
+        device = cairo_pdf,
+        width = 6L,
+        height = 6L
+      )
+
+      knitr::plot_crop(filename)
+    }
   )
 )
