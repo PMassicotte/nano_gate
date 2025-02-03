@@ -11,6 +11,7 @@ library(rerddapXtracto)
 library(crew)
 library(terra)
 library(glue)
+library(httpgd)
 
 # Set default ggplot2 font size and font family
 theme_set(theme_minimal())
