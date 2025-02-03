@@ -1,5 +1,7 @@
 # Nano Gate
 
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 This project is an R-based data processing pipeline designed for:
 
 1. Downloading and processing chlorophyll-a data from NOAA's ERDDAP service.
