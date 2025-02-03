@@ -46,6 +46,12 @@ You can run the analysis by running the following command:
 R -e 'targets::tar_make()'
 ```
 
+## References
+
+- [Parallel Targets Workshop](https://carpentries-incubator.github.io/targets-workshop/parallel.html)
+
+These improvements cover additional sections such as features, prerequisites, installation, usage example, contributing, license, acknowledgments, and references. You can copy and paste this updated README into your repository.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
@@ -54,12 +60,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 - [NOAA ERDDAP](https://coastwatch.pfeg.noaa.gov/erddap/index.html)
 - [AWI](https://www.awi.de/)
-
-## References
-
-- [Parallel Targets Workshop](https://carpentries-incubator.github.io/targets-workshop/parallel.html)
-
-These improvements cover additional sections such as features, prerequisites, installation, usage example, contributing, license, acknowledgments, and references. You can copy and paste this updated README into your repository.
 
 ## Code of Conduct
 
