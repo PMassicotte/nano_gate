@@ -20,7 +20,7 @@ options(
     )
   ),
   lintr.object_usage_linter = NULL,
-  lintr.linter_file = "~/.lintr", # nolint
+  lintr.linter_file = normalizePath("~/.lintr.R"), # nolint
 
   # Disable completion from the language server
   languageserver.server_capabilities =
